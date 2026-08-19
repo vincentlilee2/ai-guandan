@@ -1,0 +1,299 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-deep: #0b1020;
+  --bg-accent-1: #15213a;
+  --bg-accent-2: #0f172a;
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glow-cyan: #38bdf8;
+  --glow-purple: #7c3aed;
+  --glow-gold: #fbbf24;
+}
+
+body {
+  background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 26%),
+              radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.14), transparent 24%),
+              radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.12), transparent 22%),
+              linear-gradient(160deg, #0b1020 0%, #0e1527 50%, #0a0f1d 100%);
+  color: #e7ecff;
+  font-family: "Segoe UI", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  min-height: 100vh;
+}
+
+.bg-table {
+  position: relative;
+}
+
+.bg-table::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.04) 0, rgba(255,255,255,0) 22%),
+    radial-gradient(circle at 90% 10%, rgba(255,255,255,0.04) 0, rgba(255,255,255,0) 18%),
+    linear-gradient(120deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 22%);
+  background-size: 100% 100%;
+  z-index: 0;
+}
+
+.glass-panel {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 24px rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.badge-circle {
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35), 0 0 18px rgba(56, 189, 248, 0.25);
+}
+
+.badge-blue {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+}
+
+.badge-red {
+  background: linear-gradient(135deg, #f43f5e, #fb923c);
+}
+
+.badge-gold {
+  background: linear-gradient(135deg, #fbbf24, #f97316);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, #22d3ee, #2dd4bf, #6366f1);
+  color: #0b1020;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  border: none;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.35), 0 0 16px rgba(34, 211, 238, 0.55);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.btn-primary:disabled {
+  opacity: 0.35;
+  filter: grayscale(0.4);
+  box-shadow: none;
+}
+
+.btn-primary:not(:disabled):hover {
+  transform: translateY(-1px) scale(1.01);
+  filter: brightness(1.05);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-ghost:disabled {
+  opacity: 0.35;
+  box-shadow: none;
+}
+
+.btn-ghost:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.card-elevated {
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f8fafc 45%, #e2e8f0 100%);
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18), 0 0 22px rgba(124, 58, 237, 0.18);
+}
+
+.card-selected {
+  border-color: #fcd34d !important;
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.55), 0 10px 30px rgba(0, 0, 0, 0.32);
+}
+
+.card-compact {
+  background: radial-gradient(circle at 40% 30%, #ffffff 0%, #f8fafc 55%, #e5e7eb 100%);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+}
+
+/* 仅结算弹窗：剩余手牌卡面去掉“大号花色图案”，避免花色重复显乱。
+   只在 .game-result-modal 作用域生效，不影响正常牌局页面。 */
+.game-result-modal .card-center-suit {
+  display: none !important;
+}
+
+.chip-surface {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* AI思考动态效果 */
+@keyframes ai-thinking-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ai-thinking-pulse {
+  0%, 100% { 
+    opacity: 1; 
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(251, 191, 36, 0.4); 
+  }
+  50% { 
+    opacity: 0.8; 
+    box-shadow: 0 0 30px rgba(251, 191, 36, 1), 0 0 60px rgba(251, 191, 36, 0.6); 
+  }
+}
+
+.ai-thinking-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: #fbbf24;
+  border-right-color: #f59e0b;
+  border-bottom-color: #fbbf24;
+  border-left-color: #f59e0b;
+  animation: ai-thinking-spin 2s linear infinite, ai-thinking-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes pass-shake {
+  0% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(6px); }
+  45% { transform: translateX(-5px); }
+  60% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+.pass-shake {
+  animation: pass-shake 420ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pass-shake {
+    animation: none;
+  }
+}
+
+/* Bomb Explosion Effect */
+@keyframes bomb-scale {
+  0% { transform: scale(0.1); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 1; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+@keyframes bomb-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-8px, -8px) rotate(-6deg); }
+  20%, 40%, 60%, 80% { transform: translate(8px, 8px) rotate(6deg); }
+}
+
+.bomb-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bomb-emoji {
+  font-size: 15rem;
+  animation: bomb-scale 0.8s ease-out forwards;
+  filter: drop-shadow(0 0 40px rgba(255, 69, 0, 0.9));
+}
+
+.screen-shake {
+  animation: bomb-shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* ========== 扑克牌桌样式（长方形） ========== */
+.poker-table-container {
+  position: absolute;
+  top: 0;
+  /* 左右留空，让LeftBot/RightBot头像在牌桌外侧 */
+  left: 10%;
+  right: 10%;
+  /* 大幅向下延伸，确保User出牌全部落在桌面上 */
+  bottom: -35%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  padding: 6px;
+}
+
+.poker-table {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* 长方形圆角牌桌 */
+  background: radial-gradient(ellipse at center, #3d8b5f 0%, #2d6a4f 40%, #1a5635 100%);
+  border-radius: 20px;
+  /* 木质边框 */
+  border: 14px solid #582f0e;
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 15px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 4px #3d1f08,
+    0 0 0 8px #582f0e;
+}
+
+/* 桌面纹理叠加 */
+.poker-table::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.03) 3px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+  pointer-events: none;
+}
+
+/* 小屏适配 */
+@media (max-width: 640px) {
+  .poker-table-container {
+    padding: 4px;
+    left: 6%;
+    right: 6%;
+    bottom: -30%;
+  }
+  .poker-table {
+    border-radius: 14px;
+    border-width: 10px;
+    box-shadow:
+      inset 0 0 40px rgba(0, 0, 0, 0.5),
+      inset 0 0 10px rgba(0, 0, 0, 0.3),
+      0 6px 24px rgba(0, 0, 0, 0.6),
+      0 0 0 3px #3d1f08,
+      0 0 0 6px #582f0e;
+  }
+  .poker-table::before {
+    border-radius: 5px;
+  }
+}

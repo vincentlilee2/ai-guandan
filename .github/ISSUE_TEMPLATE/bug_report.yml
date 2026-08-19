@@ -1,0 +1,38 @@
+name: 🐛 Bug 报告
+description: 报告一个可复现的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请尽量提供**可复现**的信息，便于我们定位。
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 现象描述
+      description: 发生了什么？期待行为是什么？
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 一步步列出如何触发（例如：开局 → 出某手牌 → 报错）
+      placeholder: |
+        1. 启动后端 `./start_dev.sh`
+        2. 打开 http://127.0.0.1:8001
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: 环境信息
+      description: OS / Python 版本 / Node 版本 / 是否使用 Docker / 所用大模型
+      placeholder: macOS 14 / Python 3.12 / Node 20 / DeepSeek
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志（可选）
+      description: 后端终端或浏览器控制台的报错片段

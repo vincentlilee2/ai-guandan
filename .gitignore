@@ -1,0 +1,39 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+ui/dist/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data
+history/
+game_history.json
+coach_advice.json
+errorPlay/
+*.log
+
+# 会员注册/登录 JSON 持久化（运行期生成）
+users.json
+sessions.json
+plays.json
+
+# Docker 挂载的会员数据目录（./userdata 绑定到 /app/userdata）
+userdata/
+
+# Open-source export staging（公开版导出产物，绝不提交）
+export_public/
+export_public_bare/
+export_public_removed.log
+export_public_diff.patch
+# push_to_ai_guandan.sh 的线上领先保护基线（每次推送后更新，本机状态）
+.ai-guandan-online-base.sha
+
+# OS
+.DS_Store

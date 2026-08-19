@@ -1,0 +1,27 @@
+# Guandan AI · 一键启动
+#   1. cp .env.example .env  并填入 AI API Key
+#   2. docker compose up -d
+#   3. 打开 http://localhost:8001
+services:
+  guandan:
+    build: .
+    image: guandan-ai:latest
+    container_name: guandan
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    environment:
+      GUANDAN_LOG_LEVEL: ${GUANDAN_LOG_LEVEL:-INFO}
+      GAME_MAX_ACTIVE_SESSIONS: ${GAME_MAX_ACTIVE_SESSIONS:-20}
+      # 会员注册/登录数据目录（挂载卷 /app/userdata，重启/重建不丢账号）
+      GAME_USER_DATA_DIR: /app/userdata
+      # 官方服务器实例标记（仅官网需要 =1，见 .env.example 说明）；本地实例保持默认
+      IS_OFFICIAL_SERVER: ${IS_OFFICIAL_SERVER:-0}
+    volumes:
+      # 对局历史与错误样本持久化到宿主机，便于复盘
+      - ./history:/app/history
+      - ./errorPlay:/app/errorPlay
+      # 会员注册/登录数据持久化（users/sessions/plays.json）
+      - ./userdata:/app/userdata
+    restart: unless-stopped

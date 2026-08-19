@@ -1,0 +1,4 @@
+# 仅当需要将独立版接回 MySQL 持久化分数时才安装：
+#   pip install -r requirements-mysql.txt
+# score_store 在 pymysql 缺失时自动降级为内存模式，无需此依赖即可运行。
+pymysql>=1.1.0

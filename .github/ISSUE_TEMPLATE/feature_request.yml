@@ -1,0 +1,29 @@
+name: 💡 功能建议 / 讨论
+description: 提出新功能或玩法改进想法
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 想解决的问题
+      description: 现有玩法/体验的哪个痛点促使你提出这个想法？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 你的建议
+      description: 希望怎么改？如果有实现思路更好
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 影响范围
+      options:
+        - 前端体验
+        - 后端/规则引擎
+        - AI 决策
+        - 文档/示例
+        - 其他
